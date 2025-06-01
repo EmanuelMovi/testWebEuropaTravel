@@ -1,0 +1,17 @@
+Metoda 1 – HTML local
+Am creat un fisier HTML local cu footer-ul de pe europatravel.ro, unde am adaugat modificarile necesare cerintei.
+
+
+Metoda 2 – CSS injection (Stylus)
+Am instalat extensia Stylus in Chrome/Firefox.
+Am creat un stil nou pentru domeniul europatravel.ro si am pus acesta:
+
+@-moz-document domain("europatravel.ro") {
+  .fg1--row.ets--rating-main {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+  }
+
+}
+
+Am salvat si activat stilul, apoi am facut refresh pe pagina cu recenzii.

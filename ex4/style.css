@@ -1,0 +1,8 @@
+@-moz-document domain("europatravel.ro") {
+  .fg1--row.ets--rating-main {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+  }
+
+}
+

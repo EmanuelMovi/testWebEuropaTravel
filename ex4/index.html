@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ex. 4 – Recenzii</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #fff;
+        padding: 40px;
+      }
+
+      .review-section {
+        max-width: 1000px;
+        margin: auto;
+        background: #fff;
+        padding: 30px;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .add-review-block,
+      .breakdown-block,
+      .rating-block {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .add-review-block {
+        background: #f5f5f5;
+        padding: 20px;
+        border: 1px solid #ccc;
+        width: 250px;
+        order: 1;
+      }
+
+      .breakdown-block {
+        flex: 1;
+        order: 2;
+      }
+
+      .rating-block {
+        text-align: left;
+        width: 220px;
+        order: 3;
+      }
+
+      .add-review-block h3 {
+        color: #008d9a;
+        margin-top: 0;
+      }
+
+      .add-review-block button {
+        background: #008d9a;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      .bar-label {
+        width: 50px;
+      }
+
+      .breakdown-bar {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        margin: 6px 0;
+      }
+
+      .bar-track {
+        flex: 1;
+        height: 10px;
+        background: #eee;
+        margin: 0 10px;
+        position: relative;
+      }
+
+      .bar-fill {
+        height: 100%;
+        background: #ffbf00;
+      }
+
+      .rating-block h3 {
+        color: #008d9a;
+        margin-bottom: 10px;
+      }
+
+      .stars {
+        display: flex;
+        gap: 5px;
+        margin-bottom: 5px;
+      }
+
+      .star {
+        width: 24px;
+        height: 24px;
+        background: url('data:image/svg+xml;utf8,<svg fill="lightgray" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27L18.18 21 16.54 13.97 22 9.24 14.81 8.63 12 2 9.19 8.63 2 9.24 7.45 13.97 5.82 21z"/></svg>')
+          no-repeat center/contain;
+        cursor: pointer;
+      }
+
+      .star.filled {
+        background: url('data:image/svg+xml;utf8,<svg fill="gold" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27L18.18 21 16.54 13.97 22 9.24 14.81 8.63 12 2 9.19 8.63 2 9.24 7.45 13.97 5.82 21z"/></svg>')
+          no-repeat center/contain;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="review-section">
+      <div class="add-review-block">
+        <h3>Ai fost aici?</h3>
+        <p>Spune-ti parerea acordand o nota</p>
+        <button>Adauga un review</button>
+      </div>
+
+      <div class="breakdown-block">
+        <div class="breakdown-bar">
+          <span class="bar-label">5 stele</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width: 63%"></div>
+          </div>
+          <span>(2)</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">4 stele</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width: 17%"></div>
+          </div>
+          <span>(1)</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">3 stele</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width: 20%"></div>
+          </div>
+          <span>(2)</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">2 stele</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width: 0%"></div>
+          </div>
+          <span>(0)</span>
+        </div>
+        <div class="breakdown-bar">
+          <span class="bar-label">1 stea</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width: 0%"></div>
+          </div>
+          <span>(0)</span>
+        </div>
+      </div>
+
+      <div class="rating-block">
+        <h3>Acordati o nota:</h3>
+        <div class="stars">
+          <div class="star" data-value="1"></div>
+          <div class="star" data-value="2"></div>
+          <div class="star" data-value="3"></div>
+          <div class="star" data-value="4"></div>
+          <div class="star" data-value="5"></div>
+        </div>
+        <p id="rating-value">4/5 (5 voturi)</p>
+      </div>
+    </div>
+
+    <script>
+      const stars = document.querySelectorAll(".stars .star");
+      const ratingText = document.getElementById("rating-value");
+
+      stars.forEach((star, index) => {
+        star.addEventListener("click", () => {
+          stars.forEach((s, i) => {
+            s.classList.toggle("filled", i <= index);
+          });
+          ratingText.textContent = `${index + 1}/5 (vote salvat)`;
+        });
+      });
+    </script>
+  </body>
+</html>

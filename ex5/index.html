@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ex. 3 – Dynamic Field</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 50px;
+      }
+
+      .form-container {
+        width: 350px;
+        border: 1px solid #ccc;
+        padding: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .form-header {
+        position: relative;
+        margin-bottom: 40px;
+        height: 24px;
+      }
+
+      .form-title {
+        position: absolute;
+        left: 50%;
+        top: 20%;
+      }
+
+      #toggleField {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+
+      select {
+        padding: 6px 10px;
+      }
+
+      .hidden-field {
+        display: none;
+      }
+
+      .visible {
+        display: block;
+      }
+      label.required::after {
+        content: " *";
+        color: red;
+      }
+      .hidden-field {
+        transition: all 0.3s ease;
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+      }
+      .visible {
+        opacity: 1;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <div class="form-header">
+        <span class="form-title">Some text</span>
+        <select id="toggleField">
+          <option value="nu">Nu</option>
+          <option value="da">Da</option>
+        </select>
+      </div>
+
+      <form method="POST" action="submit.php">
+        <div class="form-group hidden-field" id="hiddenInputGroup">
+          <label class="required">Phone Number</label>
+          <input
+            type="tel"
+            name="phoneNumber"
+            id="hiddenInput"
+            placeholder="e.g. 0720123456"
+            pattern="[0-9]{10,15}"
+            maxlength="15"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="required">First Name</label>
+          <input type="text" name="firstName" id="firstName" required />
+        </div>
+
+        <div class="form-group">
+          <label class="required">Last Name</label>
+          <input type="text" name="lastName" id="lastName" required />
+        </div>
+
+        <input type="hidden" name="wantsToBeContacted" id="toggleValue" />
+        <button type="submit">Trimite</button>
+      </form>
+    </div>
+
+    <script>
+      const select = document.getElementById("toggleField");
+      const hiddenField = document.getElementById("hiddenInputGroup");
+      const hiddenInput = document.getElementById("hiddenInput");
+      const toggleValue = document.getElementById("toggleValue");
+
+      window.addEventListener("DOMContentLoaded", () => {
+        document.querySelector("form").reset();
+        select.value = "nu";
+        updateVisibility();
+      });
+
+      function updateVisibility() {
+        const shouldShow = select.value === "da";
+        hiddenField.classList.toggle("visible", shouldShow);
+        hiddenInput.required = shouldShow;
+        toggleValue.value = select.value;
+      }
+
+      select.addEventListener("change", updateVisibility);
+    </script>
+  </body>
+</html>

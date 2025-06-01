@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ex. 2 – Click Counter</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .box {
+        width: 10%;
+        border: 1px solid #999;
+        padding: 20px;
+        box-shadow: 2px 2px 5px #ccc;
+        text-align: left;
+      }
+
+      button {
+        margin: 10px 0px;
+        font-family: sans-serif;
+        font-size: 14px;
+        padding: 6px 12px;
+      }
+
+      #resetBtn {
+        width: 5px;
+        transition: width 0.15s ease;
+        overflow: visible;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <button id="clickBtn">Click me</button>
+      <p>Total clicks: <span id="clickCount">0</span></p>
+      <p>Total double clicks: <span id="dblClickCount">0</span></p>
+      <button id="resetBtn">Reset</button>
+    </div>
+
+    <script>
+      let clicks = 0;
+      let doubleClicks = 0;
+      let resetWidth = 5;
+
+      const clickBtn = document.getElementById("clickBtn");
+      const resetBtn = document.getElementById("resetBtn");
+      const clickDisplay = document.getElementById("clickCount");
+      const dblClickDisplay = document.getElementById("dblClickCount");
+
+      clickBtn.addEventListener("click", () => {
+        clicks++;
+        clickDisplay.textContent = clicks;
+
+        resetWidth += 5;
+        resetBtn.style.width = resetWidth + "px";
+      });
+
+      clickBtn.addEventListener("dblclick", () => {
+        doubleClicks++;
+        dblClickDisplay.textContent = doubleClicks;
+      });
+
+      resetBtn.addEventListener("click", () => {
+        clicks = 0;
+        doubleClicks = 0;
+        resetWidth = 5;
+        clickDisplay.textContent = clicks;
+        dblClickDisplay.textContent = doubleClicks;
+        resetBtn.style.width = resetWidth + "px";
+      });
+    </script>
+  </body>
+</html>

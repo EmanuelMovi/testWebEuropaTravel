@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ex. 3 – Dynamic Field</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 50px;
+      }
+
+      .form-container {
+        width: 350px;
+        border: 1px solid #ccc;
+        padding: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .form-header {
+        position: relative;
+        margin-bottom: 40px;
+        height: 24px;
+      }
+
+      .form-title {
+        position: absolute;
+        left: 50%;
+        top: 20%;
+      }
+
+      #toggleField {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+
+      select {
+        padding: 6px 10px;
+      }
+
+      .hidden-field {
+        display: none;
+      }
+
+      .visible {
+        display: block;
+      }
+      label.required::after {
+        content: " *";
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <div class="form-header">
+        <span class="form-title">Some text</span>
+        <select id="toggleField">
+          <option value="nu">Nu</option>
+          <option value="da">Da</option>
+        </select>
+      </div>
+
+      <div class="form-group hidden-field" id="hiddenInputGroup">
+        <label class="required">This field was hidden</label>
+        <input type="text" id="hiddenInput" />
+      </div>
+
+      <div class="form-group">
+        <label class="required">Filed 1</label>
+        <input type="text" id="field1" required />
+      </div>
+
+      <div class="form-group">
+        <label class="required">Filed 2</label>
+        <input type="text" id="field2" required />
+      </div>
+    </div>
+
+    <script>
+      const select = document.getElementById("toggleField");
+      const hiddenField = document.getElementById("hiddenInputGroup");
+      const hiddenInput = document.getElementById("hiddenInput");
+
+      window.addEventListener("DOMContentLoaded", () => {
+        select.value = "nu";
+        updateVisibility();
+      });
+
+      function updateVisibility() {
+        const shouldShow = select.value === "da";
+        hiddenField.classList.toggle("visible", shouldShow);
+        hiddenInput.required = shouldShow;
+      }
+
+      select.addEventListener("change", updateVisibility);
+    </script>
+  </body>
+</html>
