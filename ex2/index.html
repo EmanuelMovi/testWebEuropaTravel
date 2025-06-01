@@ -13,7 +13,7 @@
       }
 
       .box {
-        width: 10%;
+        width: 300px;
         border: 1px solid #999;
         padding: 20px;
         box-shadow: 2px 2px 5px #ccc;
@@ -46,12 +46,13 @@
     <script>
       let clicks = 0;
       let doubleClicks = 0;
-      let resetWidth = 5;
 
       const clickBtn = document.getElementById("clickBtn");
       const resetBtn = document.getElementById("resetBtn");
       const clickDisplay = document.getElementById("clickCount");
       const dblClickDisplay = document.getElementById("dblClickCount");
+      const initialResetWidth = resetBtn.offsetWidth;
+      let resetWidth = initialResetWidth;
 
       clickBtn.addEventListener("click", () => {
         clicks++;
@@ -69,9 +70,9 @@
       resetBtn.addEventListener("click", () => {
         clicks = 0;
         doubleClicks = 0;
-        resetWidth = 5;
         clickDisplay.textContent = clicks;
         dblClickDisplay.textContent = doubleClicks;
+        resetWidth = initialResetWidth;
         resetBtn.style.width = resetWidth + "px";
       });
     </script>
